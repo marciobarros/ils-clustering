@@ -140,10 +140,13 @@ public class CDAReader
 			if (visibility == null)
 				throw new XMLParseException("invalid visibility '" + sVisibility + "' for type '" + name + "'");
 			
-			ProjectClass aClass = new ProjectClass(name, classification, visibility, Boolean.parseBoolean(sAbstract));
-			aClass.setPackage(apackage);
-			project.addClass(aClass);
-			loadDependencies(aClass, child);
+			if (!name.toLowerCase().contains("-info"))
+			{
+				ProjectClass aClass = new ProjectClass(name, classification, visibility, Boolean.parseBoolean(sAbstract));
+				aClass.setPackage(apackage);
+				project.addClass(aClass);
+				loadDependencies(aClass, child);
+			}
 		}
 	}
 
@@ -190,7 +193,7 @@ public class CDAReader
 	/**
 	 * Carrega uma aplicação a partir de um arquivo no formato XML ODEM
 	 */
-	public Project execute(String filename) throws XMLParseException
+	public Project load(String filename) throws XMLParseException
 	{
 		Document doc = loadDocument(filename);
 

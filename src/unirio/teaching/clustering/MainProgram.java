@@ -6,18 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import unirio.teaching.clustering.model.Project;
-import unirio.teaching.clustering.reader.DependencyReader;
+import unirio.teaching.clustering.reader.CDAReader;
 import unirio.teaching.clustering.search.IteratedLocalSearch;
 import unirio.teaching.clustering.search.constructive.ConstrutiveAbstract;
 import unirio.teaching.clustering.search.constructive.ConstrutiveAglomerativeMQ;
 
 public class MainProgram
 {
-	private static String BASE_DIRECTORY = "C:\\Users\\User\\Desktop\\Codigos\\ils-clustering\\data\\clustering\\";
+	private static String BASE_DIRECTORY = "C:\\Users\\User\\Desktop\\Codigos\\ils-clustering\\data\\clustering\\odem-marlon";
 	
 	public static final void main(String[] args) throws Exception
 	{
-		File file = new File(BASE_DIRECTORY + "dependencies");
+		File file = new File(BASE_DIRECTORY);
 		DecimalFormat df4 = new DecimalFormat("0.0000");
 		
 		ConstrutiveAbstract constructor = new ConstrutiveAglomerativeMQ();
@@ -27,8 +27,9 @@ public class MainProgram
         {
         	long startTimestamp = System.currentTimeMillis();
         	
-    		DependencyReader reader = new DependencyReader();
-    		Project project = reader.load(BASE_DIRECTORY + "dependencies\\" + projectName);
+    		//DependencyReader reader = new DependencyReader();
+        	CDAReader reader = new CDAReader();
+    		Project project = reader.load(BASE_DIRECTORY + "\\" + projectName);
 
     		IteratedLocalSearch ils = new IteratedLocalSearch(constructor, project, 100_000);
     		int[] solution = ils.execute();
@@ -38,7 +39,6 @@ public class MainProgram
     		
     		long memory = Runtime.getRuntime().freeMemory() / (1024 * 1024);
     		System.out.println(padLeft(projectName, 20) + " " + padRight("" + project.getClassCount(), 10) + padRight("" + countClusters(solution), 10) + " " + padRight(df4.format(ils.getBestFitness()), 10) + " " + padRight("" + seconds, 10) + " ms " + padRight("" + memory, 10) + " MB");
-    		//System.out.println(projectName + ";" + project.getClassCount() + ";" + df4.format(ils.getBestFitness()));
         }
 	}
 
