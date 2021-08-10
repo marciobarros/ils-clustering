@@ -85,9 +85,10 @@ public class IteratedLocalSearch
 				String targetName = _class.getDependencyIndex(j).getElementName();
 				int classIndex = project.getClassIndex(targetName);
 				
-				if (classIndex == -1)
-					throw new Exception ("Class not registered in project: " + targetName);
+//				if (classIndex == -1)
+//					throw new Exception ("Class not registered in project: " + targetName);
 				
+				if (classIndex != -1)
 				mdg.addModuleDependency(i, classIndex, 1);
 			}
 		}

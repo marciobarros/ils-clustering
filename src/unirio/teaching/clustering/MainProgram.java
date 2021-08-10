@@ -13,7 +13,7 @@ import unirio.teaching.clustering.search.constructive.ConstrutiveAglomerativeMQ;
 
 public class MainProgram
 {
-	private static String BASE_DIRECTORY = "C:\\Users\\User\\Desktop\\Codigos\\ils-clustering\\data\\clustering\\odem-marlon";
+	private static String BASE_DIRECTORY = "C:\\Users\\User\\Desktop\\Codigos\\ils-clustering\\data\\clustering\\odem-temp";
 	
 	public static final void main(String[] args) throws Exception
 	{
